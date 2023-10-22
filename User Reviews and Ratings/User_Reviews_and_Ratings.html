@@ -1,0 +1,57 @@
+<!-- HTML form for user reviews -->
+<form id="reviewForm">
+    <input type="text" id="username" placeholder="Your Name">
+    <textarea id="userReview" placeholder="Write your review"></textarea>
+    <input type="number" id="userRating" placeholder="Rating (1-5)">
+    <button type="button" onclick="submitReview()">Submit Review</button>
+  </form>
+  
+  <!-- Display existing reviews -->
+  <div id="reviews">
+    <!-- Reviews will be displayed here -->
+  </div>
+  
+  <script>
+    function submitReview() {
+      const username = document.getElementById('username').value;
+      const review = document.getElementById('userReview').value;
+      const rating = document.getElementById('userRating').value;
+  
+      // Validate input (you may want to add more validation)
+      if (!username || !review || !rating) {
+        alert("Please fill in all fields");
+        return;
+      }
+  
+      const reviewData = {
+        username: username,
+        review: review,
+        rating: rating,
+      };
+  
+      // Send the review data to the server (use AJAX, fetch, or a library like Axios)
+      // Example: sendReviewToServer(reviewData);
+  
+      // For simplicity, let's add the review to the DOM immediately
+      addReviewToDOM(reviewData);
+  
+      // Clear the form
+      document.getElementById('username').value = '';
+      document.getElementById('userReview').value = '';
+      document.getElementById('userRating').value = '';
+    }
+  
+    function addReviewToDOM(reviewData) {
+      const reviewsContainer = document.getElementById('reviews');
+      const reviewElement = document.createElement('div');
+      reviewElement.innerHTML = `
+        <strong>${reviewData.username}</strong>
+        <p>${reviewData.review}</p>
+        <p>Rating: ${reviewData.rating}</p>
+        <hr>
+      `;
+      reviewsContainer.appendChild(reviewElement);
+    }
+  </script>
+  </html>
+  
